@@ -204,7 +204,7 @@ async function saveSettings(){const need=Number(byId('need').value);if(!Number.i
   if(saved){byId('pin').value='';if(newPin)staffPinForAdmin=newPin;notify(tr('saved'));}
 }
 function downloadFile(name,content,mime){const url=URL.createObjectURL(new Blob([content],{type:mime}));const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
-function exportBackup(){downloadFile('stamp-club-backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(store,null,2),'application/json;charset=utf-8');notify(tr('exportDone'));}
+function exportBackup(){const data={...store,settings:{...store.settings}};delete data.settings.pin;downloadFile('stamp-club-backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(data,null,2),'application/json;charset=utf-8');notify(tr('exportDone'));}
 function safeCSV(value){let v=String(value??'');if(/^\s*[=+\-@\t\r]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"';}
 function exportCSV(){const cols=[tr('logPhoneCol'),tr('logActionCol'),tr('logDateCol'),tr('logDetailCol')];const lines=[cols.map(safeCSV).join(',')];for(const h of filteredEvents)lines.push([h.phone,tr(h.type==='add'?'stampAdded':h.type==='redeem'?'redeemed':'stampUndone'),fmtDate(h.ts),h.reason||h.code||''].map(safeCSV).join(','));downloadFile('stamp-club-logs-'+new Date().toISOString().slice(0,10)+'.csv','\ufeff'+lines.join('\r\n'),'text/csv;charset=utf-8');notify(tr('csvDone'));}
 async function importBackup(event){const file=event.target.files?.[0];event.target.value='';if(!file)return;
