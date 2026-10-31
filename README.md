@@ -1,29 +1,44 @@
-# Stamp Club — Digital Loyalty Card PWA
+# Stamp Club — Cloud Loyalty PWA
 
-A dependency-free, installable Progressive Web App based on the supplied single-file Chinese/English/Malay loyalty stamp-card prototype.
+Multilingual English / 中文 / Bahasa Melayu coffee-shop loyalty stamp app with a ready-to-use customer number pad, Vercel API routes and Neon PostgreSQL cloud persistence.
 
-## Features
-- Chinese, English and Bahasa Melayu UI
-- Member lookup/creation by Malaysian mobile number
-- Stamp collection, progress and free-drink redemption (default 10 stamps per drink)
-- Unique redemption codes and print-friendly 80 mm receipts
-- Staff PIN gate for admin dashboard and stamp reversal
-- Undo tracking with mandatory reason; previously redeemed stamps cannot be undone
-- Activity log with date, action and phone filters, CSV export
-- Store name, address and reward threshold settings
-- JSON backup/restore (including migration from the original `stamp_app_v1` localStorage key)
-- Offline installable PWA via manifest and service worker
+## What's included
 
-## Run locally
-Run `python -m http.server 8080` from this directory, then visit http://localhost:8080. Do not open `index.html` directly from the filesystem if you want PWA install/offline support.
+- Full-width on-screen numeric keypad on STEP 01, instantly ready on opening or returning to member lookup, including backspace and clear
+- Malaysian mobile phone lookup and registration stored in PostgreSQL
+- Stamp issuance, redemption and PIN-protected undo inside database transactions, so two devices cannot overwrite each other's member balance
+- Rewards calculated from server-stored shop settings and redemption codes generated on the server
+- Live multi-device sync (refresh after writes, every 12 seconds, and when the tab regains focus)
+- Server-side authenticated staff sessions (HttpOnly / Secure / SameSite=Strict cookie, eight-hour expiry)
+- Cloud-backed store settings, activity history and audits, CSV export, JSON backup and admin-only restore/reset
+- Rate-limited login; four-digit admin PIN stored only as a salted scrypt hash on the server, never returned to browsers
+- An installable PWA with offline-cached UI assets. **A connection is required for transactions**; offline changes are not queued
 
-## Deploy
-Upload this directory to Vercel as a static website, or drag the folder onto Netlify Drop. The included `vercel.json` supplies basic security headers.
+## Configure Vercel and Neon PostgreSQL
 
-## Important production limitations
-**Not a centralized loyalty database.** Customer records and staff PIN are saved in the current browser's `localStorage` only. The PIN is a convenience gate, **not secure authentication**. Another operator on the same device can inspect or manipulate local records using developer tools. There is no trusted server-side stamp issuance, redemption verification, cross-device sync, account recovery, encrypted backups, or centralized audit trail. Do not assume data persists if browser storage is cleared. Do not deploy as a customer-facing public kiosk with real monetary rewards without a backend and real staff authentication. Store customer data only with appropriate notice/consent and retention policy. Export backups regularly.
+1. Create a **Neon Postgres database** in the Vercel Storage/Marketplace section, or use an existing PostgreSQL database reachable by Neon serverless driver. In the Vercel project settings, attach a Neon database and expose `DATABASE_URL` to **Production** and **Preview** where needed. You must configure actual database resources; installing the Neon integration alone is insufficient.
+2. Under **Vercel → Project → Settings → Environment Variables**, set `STORE_ACCESS_KEY` to a strong, random passphrase **at least 12 characters**. Treat it as an access credential. Set it for the same environments.
+3. Redeploy the project to apply the variables. `GET /api/auth` returns `{configured:true, authenticated:false}` when setup is complete and you are not signed in.
+4. Open the app and enter your store access key. Database tables are created on the first successful sign-in. Go to Admin settings with initial PIN `8888` and **change that PIN immediately**.
+5. Repeat the same store access key on each authorized device. Members and transactions are always stored in the shared PostgreSQL database.
 
-Default admin PIN: `8888` — change it in the Admin screen for casual misuse prevention. For real merchant use, replace the local-only storage with a transactional backend (e.g. Supabase/Postgres), role-based staff accounts, server-side idempotent stamp/redeem functions and append-only logs.
+**Do not add `.env` files or credentials to GitHub.** `.env.example` contains variable names only.
 
-## Migrating existing records
-When opened on the **same hostname and browser** as the old app, the new app will import existing `stamp_app_v1` data automatically once. For a new hostname or device, export the JSON from the old app and import it into this PWA via Admin → Restore JSON backup. No cross-site `localStorage` transfer is possible automatically.
+## Migrating customers from the browser-only version
+
+On the OLD live app and device/browser where records were originally stored, open Admin → Download JSON backup. On the NEW cloud-enabled app, log in, open Admin → Restore JSON backup, select that saved backup and confirm. This replaces existing cloud records. Import preserves member balances, activity, store name, address, and reward threshold, but intentionally retains the **current cloud admin PIN**. After import, verify member count and some individual balances.
+
+The cloud app does **not** silently import old `localStorage` data because customers may have different device-local datasets and automatic merging would duplicate transactions or override valid balances.
+
+## Local development
+
+Use Node.js 22+ and run `npm install` then `npx vercel dev` from the project root. Configure `DATABASE_URL` and `STORE_ACCESS_KEY` in a private local `.env.local` file. Static `python -m http.server` does not run the cloud API routes.
+
+## Operational notes
+
+- Cloud transactions require Internet. Client-side stamp balances are never authoritative.
+- App data is single-store by design (one database per Vercel project). Do not share the same database credentials between unrelated merchants.
+- Initial server-side PIN is `8888`, protected behind the separate strong `STORE_ACCESS_KEY`; change it after setup.
+- The member snapshot currently loads all members and events for the admin UI. For large-scale deployment, add server-side event pagination, role-based employee accounts, retention policies and data export jobs.
+- Handling customer telephone numbers requires a privacy notice, access-control procedures, retention limits and backups appropriate to Malaysian data-protection obligations.
+- Service worker caches only static UI assets, never `/api/` requests or cloud data.
