@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#13263c">
+  <meta name="description" content="An offline-friendly loyalty stamp card for cafés. Track purchases, reward customers, and print receipts.">
+  <meta name="color-scheme" content="light">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./assets/icon-192.png">
+  <link rel="apple-touch-icon" href="./assets/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Loyalty Stamp Card</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="identity"><span class="brandmark" aria-hidden="true">★</span><div><div class="brandname">STAMP <span>CLUB</span></div><div class="brandtag" data-i18n="brandSub">Digital loyalty console</div></div></div>
+      <div class="top-actions">
+        <div class="language-switch" role="group" aria-label="Language">
+          <button data-lang="en" class="language-choice active" type="button">EN</button>
+          <button data-lang="zh" class="language-choice" type="button">中文</button>
+          <button data-lang="ms" class="language-choice" type="button">BM</button>
+        </div>
+        <button class="icon-btn" id="headerAdmin" type="button" data-i18n-title="admin" title="Admin settings" aria-label="Admin settings">⚙</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy"><span class="eyebrow"><span class="dot"></span><span data-i18n="eyebrow">YOUR LOYALTY PROGRAM</span></span>
+          <h1 data-i18n="heroTitle">Every cup brings a reward.</h1>
+          <p data-i18n="heroText">A simpler way to reward returning customers — no plastic cards needed.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true"><span>☕</span><span class="hero-star hero-star-one">✳</span><span class="hero-star hero-star-two">✦</span></div>
+      </section>
+
+      <section id="lookupCard" class="surface lookup-card" aria-labelledby="lookupHeading">
+        <div class="section-heading"><div><div class="overline" data-i18n="stepOne">STEP 01 · MEMBER LOOKUP</div><h2 id="lookupHeading" data-i18n="lookupTitle">Find a member</h2></div><span class="section-icon" aria-hidden="true">⌕</span></div>
+        <form id="lookupForm" class="lookup-form" autocomplete="off">
+          <label for="phone" data-i18n="phoneLabel">Customer phone number</label>
+          <div class="lookup-controls"><div class="phone-field"><span class="phone-prefix">MY +60</span><input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="011 2345 6789" aria-describedby="phoneHint" required maxlength="24"></div><button class="btn btn-primary" type="submit"><span data-i18n="findMember">Find / create</span><span aria-hidden="true">→</span></button></div>
+          <div class="helper" id="phoneHint" data-i18n="lookupHint">New numbers automatically create a member record on this device.</div>
+        </form>
+      </section>
+
+      <section id="memberPanel" class="member-panel" hidden aria-labelledby="memberTitle">
+        <div class="section-split"><div><div class="overline" data-i18n="stepTwo">STEP 02 · MEMBER CARD</div><h2 id="memberTitle" data-i18n="memberTitle">Member rewards</h2></div><button class="btn btn-text" id="changeMember" type="button" data-i18n="switchMember">Switch member ↗</button></div>
+        <div class="loyalty-card">
+          <div class="loyalty-head"><div><span class="loyalty-overline" data-i18n="loyaltyCard">LOYALTY CARD</span><div class="loyalty-phone" id="memberPhone">—</div></div><div class="loyalty-symbol" aria-hidden="true">★</div></div>
+          <div class="reward-summary"><div class="reward-balance"><strong id="rewardCount">0</strong><div><span data-i18n="freeCups">Free drinks</span><small data-i18n="readyToClaim">Ready to redeem</small></div></div><div class="reward-separator"></div><div class="stamp-balance"><strong id="stampCount">0</strong><span data-i18n="availableStamps">Available stamps</span></div></div>
+          <div class="progress-row"><span data-i18n="yourProgress">YOUR PROGRESS</span><strong id="progressCaption">0 / 10</strong></div>
+          <div class="stamp-progress" role="progressbar" aria-label="Progress to next reward" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" id="progressTrack"><span id="progressFill"></span></div>
+          <p class="loyalty-hint" id="remainingHint"></p>
+          <div id="stampGrid" class="stamp-grid" aria-label="Loyalty stamps"></div>
+          <div class="loyalty-footer"><span id="shopLabel">YOUR CAFE</span><span data-i18n="thanks">THANKS FOR YOUR SUPPORT ✦</span></div>
+        </div>
+        <div class="actions-grid"><button type="button" id="addStamp" class="btn btn-primary action-main"><span class="action-icon">＋</span><span data-i18n="addStamp">Add 1 stamp</span></button><button type="button" id="redeem" class="btn btn-dark action-main" disabled><span class="action-icon">✦</span><span data-i18n="redeemDrink">Redeem free drink</span></button></div>
+        <button type="button" id="undo" class="undo-link" data-i18n="undoStamp">↶ Undo last stamp (PIN required)</button>
+      </section>
+
+      <section id="adminPanel" class="surface admin-card" hidden aria-labelledby="adminTitle">
+        <div class="section-split"><div><div class="overline" data-i18n="management">MANAGEMENT</div><h2 id="adminTitle" data-i18n="adminTitle">Store dashboard</h2></div><button class="btn btn-text" id="closeAdmin" data-i18n="closeAdmin" type="button">Close admin ✕</button></div>
+        <div class="summary-grid"><div class="summary-tile"><span data-i18n="totalMembers">Total members</span><strong id="totalMembers">0</strong></div><div class="summary-tile"><span data-i18n="allStamps">Active stamps</span><strong id="totalStamps">0</strong></div><div class="summary-tile"><span data-i18n="totalRedeemed">Drinks redeemed</span><strong id="totalRedemptions">0</strong></div></div>
+        <div class="subsection"><h3 data-i18n="settingsTitle">Store settings</h3><div class="field-grid"><div class="field"><label for="shopName" data-i18n="shopName">Store name</label><input id="shopName" maxlength="80" placeholder="Your Café"></div><div class="field"><label for="need" data-i18n="stampsRequired">Stamps per reward</label><input id="need" type="number" min="1" max="30" value="10"></div><div class="field"><label for="shopAddress" data-i18n="shopAddress">Store address (optional)</label><input id="shopAddress" maxlength="160" placeholder="Kota Kinabalu"></div><div class="field"><label for="pin" data-i18n="staffPin">Staff PIN (4 digits)</label><input id="pin" type="password" inputmode="numeric" autocomplete="off" pattern="[0-9]{4}" minlength="4" maxlength="4"></div></div><button class="btn btn-primary" id="saveSettings" type="button" data-i18n="saveSettings">Save settings</button></div>
+        <div class="subsection"><h3 data-i18n="activityTitle">Activity log</h3><div class="filter-grid"><div class="field"><label for="logPhone" data-i18n="filterPhone">Phone filter</label><input id="logPhone" type="tel" placeholder="6011..."></div><div class="field"><label for="logAction" data-i18n="filterAction">Action</label><select id="logAction"><option value="all" data-i18n="allActions">All actions</option><option value="add" data-i18n="stampAdded">Stamp added</option><option value="redeem" data-i18n="redeemed">Redeemed</option><option value="undo" data-i18n="stampUndone">Stamp undone</option></select></div><div class="field"><label for="startDate" data-i18n="startDate">Start date</label><input id="startDate" type="date"></div><div class="field"><label for="endDate" data-i18n="endDate">End date</label><input id="endDate" type="date"></div></div><div class="quick-filters"><button class="filter-chip" type="button" data-range="today" data-i18n="today">Today</button><button class="filter-chip" type="button" data-range="week" data-i18n="thisWeek">This week</button><button class="filter-chip" type="button" data-range="month" data-i18n="thisMonth">This month</button><button class="filter-chip" type="button" data-range="all" data-i18n="allTime">All time</button></div><div class="table-scroller"><table><thead><tr><th data-i18n="logPhoneCol">Phone</th><th data-i18n="logActionCol">Action</th><th data-i18n="logDateCol">Date / time</th><th data-i18n="logDetailCol">Details</th></tr></thead><tbody id="logRows"><tr><td colspan="4">—</td></tr></tbody></table></div><button class="btn btn-outline" id="exportCSV" type="button" data-i18n="exportCSV">↓ Export filtered CSV</button></div>
+        <div class="subsection"><h3 data-i18n="dataTools">Data and backups</h3><p class="small-note" data-i18n="localNotice">Records are saved only in this browser. Export a backup before resetting or changing devices.</p><div class="data-actions"><button id="exportBackup" class="btn btn-outline" type="button" data-i18n="exportBackup">↓ Download JSON backup</button><label for="importBackup" class="btn btn-outline upload-label" data-i18n="importBackup">↑ Restore JSON backup</label><input id="importBackup" type="file" accept=".json,application/json" hidden><button id="resetAll" class="btn btn-danger-outline" type="button" data-i18n="resetAll">Reset all data</button></div></div>
+      </section>
+    </main>
+
+    <footer class="footer"><div><strong>STAMP CLUB</strong><span data-i18n="footerLine">Built for everyday loyalty.</span></div><div class="footer-right"><span class="local-badge"><span class="dot"></span><span data-i18n="deviceOnly">Device-only storage</span></span><button id="installApp" class="install-button" type="button" hidden data-i18n="install">Install app ↓</button></div></footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="modal" class="modal-backdrop" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="modalHeading"><button id="dismissModal" class="dialog-x" type="button" aria-label="Close">✕</button><div class="dialog-icon" id="modalIcon">★</div><h2 id="modalHeading"></h2><p id="modalDescription"></p><div class="dialog-field" id="modalInputWrap" hidden><label for="modalInput" id="modalInputLabel"></label><input id="modalInput" autocomplete="off"></div><div id="modalActions" class="dialog-actions"></div></div></div>
+  <div id="printArea" class="print-area" aria-hidden="true"><div class="receipt"><h2 id="printShop">SHOP</h2><p id="printAddress"></p><div class="receipt-line"></div><h3 id="printTitle">FREE DRINK REDEMPTION</h3><p id="printTime"></p><div class="receipt-line"></div><div class="receipt-row"><span id="receiptPhoneLabel">Phone</span><strong id="printPhone"></strong></div><div class="receipt-row"><span id="receiptCodeLabel">Code</span><strong id="printCode"></strong></div><div class="receipt-line"></div><p id="printThanks"></p></div></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
