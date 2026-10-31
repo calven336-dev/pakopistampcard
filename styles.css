@@ -5,7 +5,7 @@
 .keypad-title{display:flex;align-items:center;justify-content:center;gap:9px;color:#47647f;font-weight:800;font-size:10px;letter-spacing:1.3px;padding:2px 0 15px}
 .keypad-live-dot{width:8px;height:8px;display:block;border-radius:50%;background:#35b08d;box-shadow:0 0 0 4px rgba(53,176,141,.13)}
 .keypad-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.pad-key{display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #d9e2ed;border-radius:15px;background:#fff;color:#152942;font-family:inherit;font-size:25px;font-weight:800;min-height:63px;box-shadow:0 3px 0 #d8e1eb;cursor:pointer;touch-action:auto;transition:transform .1s,background .1s}
+.pad-key{display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #d9e2ed;border-radius:15px;background:#fff;color:#152942;font-family:inherit;font-size:25px;font-weight:800;min-height:63px;box-shadow:0 3px 0 #d8e1eb;cursor:pointer;touch-action:pan-x pan-y;transition:transform .1s,background .1s}
 .pad-key small{font-size:9px;letter-spacing:1.6px;color:#8394a9;font-weight:750;margin-top:2px}
 .pad-key:active{background:#e6effb;transform:translateY(2px);box-shadow:0 1px 0 #d8e1eb}
 .pad-key:focus-visible{outline:3px solid #f7ad5a;outline-offset:2px}
@@ -14,5 +14,7 @@
 .cloud-status{display:inline-flex;align-items:center;color:#329d7b;font-size:11px;font-weight:700;margin-left:10px}
 @media(max-width:480px){.phone-keypad{margin-top:16px;padding:12px}.pad-key{min-height:58px}}
 
-/* Touch accessibility: prevent involuntary input-focus zoom; allow intentional page zoom. */
+/* Kiosk-style PWA gestures: retain one-finger scrolling, disable pinch and double-tap page zoom. */
 .phone-field input{font-size:16px;caret-color:transparent}
+
+html,body,.app-shell{touch-action:pan-x pan-y}

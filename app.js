@@ -236,7 +236,18 @@ async function resetAll(){if(!await confirmAction(tr('resetTitle'),tr('resetQues
   if(saved){currentPhone=null;byId('memberPanel').hidden=true;byId('adminPanel').hidden=true;resetToLookup();notify(tr('resetDone'));}
 }
 function setRange(range){const d=new Date(),localISO=x=>[x.getFullYear(),String(x.getMonth()+1).padStart(2,'0'),String(x.getDate()).padStart(2,'0')].join('-');let start='';let end='';if(range!=='all'){end=localISO(d);const s=new Date(d);if(range==='week')s.setDate(d.getDate()-((d.getDay()+6)%7));else if(range==='month')s.setDate(1);start=localISO(s);}byId('startDate').value=start;byId('endDate').value=end;renderAdmin();}
-function bind(){byId('lookupForm').addEventListener('submit',async e=>{e.preventDefault();const p=normalizePhone(byId('phone').value);if(!p){notify(tr('invalidPhone'),true);focusPhone();return;}const saved=await mutateCloud('lookup',{phone:p});if(!saved)return;showMember(p);notify(tr('memberReady'));});
+// Keep single-finger scrolling and keypad taps. Block browser-level
+// two-finger magnification in Safari where viewport restrictions alone are insufficient.
+function disableManualZoom(){
+  const cancelGesture=e=>e.preventDefault();
+  for(const type of ['gesturestart','gesturechange','gestureend']){
+    document.addEventListener(type,cancelGesture,{passive:false});
+  }
+  document.addEventListener('touchmove',e=>{
+    if(e.touches?.length>1)e.preventDefault();
+  },{passive:false});
+}
+function bind(){disableManualZoom();byId('lookupForm').addEventListener('submit',async e=>{e.preventDefault();const p=normalizePhone(byId('phone').value);if(!p){notify(tr('invalidPhone'),true);focusPhone();return;}const saved=await mutateCloud('lookup',{phone:p});if(!saved)return;showMember(p);notify(tr('memberReady'));});
   document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{store.settings.lang=b.dataset.lang;persist();applyLanguage();}));
   document.querySelectorAll('[data-digit]').forEach(b=>b.addEventListener('click',()=>appendPhoneDigit(b.dataset.digit)));
   byId('padBackspace').addEventListener('click',backspacePhone);
