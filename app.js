@@ -14,7 +14,7 @@ const translations = {
     redeemTitle:'Redeem one free drink?', redeemQuestion:'This will deduct {n} stamps from {p}.', redeemConfirm:'Redeem drink', receiptTitle:'Redemption successful!', receiptDetail:'Code: {c}. You can print an 80 mm receipt.', print:'Print receipt', done:'Done', undoTitle:'Undo last stamp?', undoQuestion:'A reason is required for the audit log.', reason:'Reason', reasonPlaceholder:'e.g. Duplicate entry', undoConfirm:'Undo stamp', noUndo:'No unredeemed stamp can be undone.', missingReason:'Please provide a reason.',
     resetTitle:'Erase all store data?', resetQuestion:'This permanently deletes all members and activity stored in this browser. Download a backup first.', resetConfirm:'Erase everything', resetDone:'Local data reset', exportDone:'Backup downloaded', importTitle:'Restore backup?', importQuestion:'Restoring a backup replaces all current browser records. This cannot be undone.', importConfirm:'Replace records', importDone:'Backup restored', importInvalid:'Invalid or unsupported backup.', importTooLarge:'Backup must be smaller than 5 MB.',
     noLogs:'No activity matches these filters.', storageWarning:'Local browser storage is blocked or full.', pinInvalid:'Enter exactly 4 PIN digits.', stampsInvalid:'Stamps per reward must be 1–30.', dateInvalid:'Start date cannot be after end date.', receiptPhone:'Phone', receiptCode:'Code', receiptThanks:'Thank you! Please enjoy your reward.', anonymousShop:'YOUR CAFE', rewardCount:'{n} reward(s) available',
-      padReady:'NUMPAD READY · ENTER PHONE NUMBER',padClear:'CLEAR',padHint:'Tap numbers above or type using your keyboard.',
+      padReady:'NUMPAD READY · ENTER PHONE NUMBER',padClear:'CLEAR',padHint:'Tap the number pad above. The phone keyboard stays hidden.',
   installUnsupported:'Use your browser menu to install the app.', csvDone:'CSV downloaded', logReset:'All data reset', close:'Close'
   },
   zh: {
@@ -31,7 +31,7 @@ const translations = {
     redeemTitle:'确定兑换一杯免费饮料？', redeemQuestion:'这将从 {p} 扣除 {n} 枚印章。', redeemConfirm:'确认兑换', receiptTitle:'兑换成功！', receiptDetail:'兑换编号：{c}。可打印 80mm 小票。', print:'打印小票', done:'完成', undoTitle:'撤销最近印章？', undoQuestion:'必须填写原因以便操作记录追踪。', reason:'撤销原因', reasonPlaceholder:'例如：重复输入', undoConfirm:'撤销印章', noUndo:'没有可撤销的未兑换印章。', missingReason:'请填写撤销原因。',
     resetTitle:'清空本店全部数据？', resetQuestion:'此操作会删除当前浏览器的所有会员及日志，且无法恢复。请先下载备份。', resetConfirm:'确定清空', resetDone:'本地数据已清空', exportDone:'备份已下载', importTitle:'恢复备份？', importQuestion:'导入备份将取代当前浏览器的全部记录，无法撤销。', importConfirm:'取代记录', importDone:'备份已恢复', importInvalid:'备份格式无效或不受支持。', importTooLarge:'备份文件不得超过 5MB。',
     noLogs:'没有符合筛选条件的记录。', storageWarning:'浏览器储存已满或被禁用。', pinInvalid:'PIN 必须是 4 位数字。', stampsInvalid:'兑换门槛必须介于 1 至 30 枚印章。', dateInvalid:'开始日期不可迟于结束日期。', receiptPhone:'手机号码', receiptCode:'兑换码', receiptThanks:'谢谢支持，请享用您的免费饮料。', anonymousShop:'您的咖啡店', rewardCount:'{n} 杯可兑换',
-      padReady:'数字键盘已就绪 · 输入手机号码',padClear:'清除',padHint:'点击上方数字键，或使用键盘输入。',
+      padReady:'数字键盘已就绪 · 输入手机号码',padClear:'清除',padHint:'使用上方数字键输入，手机系统键盘不会弹出。',
   installUnsupported:'请在浏览器菜单中选择安装应用。', csvDone:'CSV 已下载', logReset:'全部数据已清空', close:'关闭'
   },
   ms: {
@@ -48,7 +48,7 @@ const translations = {
     redeemTitle:'Tebus satu minuman percuma?', redeemQuestion:'Sebanyak {n} cop akan ditolak daripada {p}.', redeemConfirm:'Tebus minuman', receiptTitle:'Penebusan berjaya!', receiptDetail:'Kod: {c}. Anda boleh cetak resit 80mm.', print:'Cetak resit', done:'Selesai', undoTitle:'Batalkan cop terakhir?', undoQuestion:'Sebab diperlukan untuk log audit.', reason:'Sebab', reasonPlaceholder:'Contoh: Entri berganda', undoConfirm:'Batalkan cop', noUndo:'Tiada cop belum tebus yang boleh dibatalkan.', missingReason:'Sila nyatakan sebab.',
     resetTitle:'Padam semua data kedai?', resetQuestion:'Semua ahli dan aktiviti dalam pelayar ini akan dipadam secara kekal. Muat turun sandaran dahulu.', resetConfirm:'Padam semuanya', resetDone:'Data setempat dipadam', exportDone:'Sandaran dimuat turun', importTitle:'Pulihkan sandaran?', importQuestion:'Pemulihan akan menggantikan semua rekod semasa dan tidak boleh dibatalkan.', importConfirm:'Ganti rekod', importDone:'Sandaran dipulihkan', importInvalid:'Sandaran tidak sah atau tidak disokong.', importTooLarge:'Fail sandaran mesti kurang daripada 5 MB.',
     noLogs:'Tiada aktiviti sepadan dengan penapis.', storageWarning:'Storan pelayar disekat atau penuh.', pinInvalid:'Masukkan tepat 4 digit PIN.', stampsInvalid:'Cop bagi ganjaran mesti 1–30.', dateInvalid:'Tarikh mula tidak boleh selepas tarikh akhir.', receiptPhone:'Telefon', receiptCode:'Kod', receiptThanks:'Terima kasih! Nikmati ganjaran anda.', anonymousShop:'KAFE ANDA', rewardCount:'{n} ganjaran tersedia',
-      padReady:'PAD NOMBOR SEDIA · MASUKKAN TELEFON',padClear:'PADAM',padHint:'Tekan nombor di atas atau gunakan papan kekunci.',
+      padReady:'PAD NOMBOR SEDIA · MASUKKAN TELEFON',padClear:'PADAM',padHint:'Gunakan pad nombor di atas tanpa papan kekunci telefon muncul.',
   installUnsupported:'Gunakan menu pelayar untuk memasang aplikasi.', csvDone:'CSV dimuat turun', logReset:'Semua data dipadam', close:'Tutup'
   }
 };
@@ -164,7 +164,22 @@ async function verifyPIN(){const input=await modal({title:tr('pinTitle'),descrip
   staffPinForAdmin=input;return true;
 }
 async function nextCustomerPrompt(){const selected=await modal({title:tr('nextTitle'),description:tr('nextQuestion'),icon:'★',actions:[{text:tr('continueMember'),value:'stay'},{text:tr('nextMember'),value:'next',className:'btn-primary'}]});if(selected==='next')resetToLookup();}
-function focusPhone(){const input=byId('phone');input.focus({preventScroll:true});input.setSelectionRange?.(input.value.length,input.value.length);}
+// Never programmatically focus the read-only mobile lookup field: focusing an
+// editable telephone input was opening the OS keyboard on iOS/Android.
+function focusPhone(){
+  const input=byId('phone');
+  if(window.matchMedia?.('(pointer:fine)').matches){
+    input.focus({preventScroll:true});
+    input.setSelectionRange?.(input.value.length,input.value.length);
+  }
+}
+function appendPhoneDigit(digit){
+  const input=byId('phone');
+  if(input.value.replace(/\D/g,'').length>=13)return;
+  input.value+=digit;
+}
+function backspacePhone(){const input=byId('phone');input.value=input.value.slice(0,-1);}
+function clearPhone(){byId('phone').value='';}
 function resetToLookup(){currentPhone=null;byId('memberPanel').hidden=true;byId('phone').value='';byId('lookupCard').scrollIntoView({behavior:'smooth',block:'start'});focusPhone();}
 function idCode(){if(globalThis.crypto?.getRandomValues){const bytes=new Uint8Array(5);crypto.getRandomValues(bytes);return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();}return Math.random().toString(36).slice(2,12).toUpperCase();}
 function logEvent(u,type,extra={}){u.history.unshift({type,ts:Date.now(),...extra});}
@@ -223,9 +238,16 @@ async function resetAll(){if(!await confirmAction(tr('resetTitle'),tr('resetQues
 function setRange(range){const d=new Date(),localISO=x=>[x.getFullYear(),String(x.getMonth()+1).padStart(2,'0'),String(x.getDate()).padStart(2,'0')].join('-');let start='';let end='';if(range!=='all'){end=localISO(d);const s=new Date(d);if(range==='week')s.setDate(d.getDate()-((d.getDay()+6)%7));else if(range==='month')s.setDate(1);start=localISO(s);}byId('startDate').value=start;byId('endDate').value=end;renderAdmin();}
 function bind(){byId('lookupForm').addEventListener('submit',async e=>{e.preventDefault();const p=normalizePhone(byId('phone').value);if(!p){notify(tr('invalidPhone'),true);focusPhone();return;}const saved=await mutateCloud('lookup',{phone:p});if(!saved)return;showMember(p);notify(tr('memberReady'));});
   document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{store.settings.lang=b.dataset.lang;persist();applyLanguage();}));
-  document.querySelectorAll('[data-digit]').forEach(b=>b.addEventListener('click',()=>{const input=byId('phone');if(input.value.replace(/\D/g,'').length>=13)return;input.value+=b.dataset.digit;focusPhone();}));
-  byId('padBackspace').addEventListener('click',()=>{const input=byId('phone');input.value=input.value.slice(0,-1);focusPhone();});
-  byId('padClear').addEventListener('click',()=>{byId('phone').value='';focusPhone();});byId('changeMember').addEventListener('click',resetToLookup);
+  document.querySelectorAll('[data-digit]').forEach(b=>b.addEventListener('click',()=>appendPhoneDigit(b.dataset.digit)));
+  byId('padBackspace').addEventListener('click',backspacePhone);
+  byId('padClear').addEventListener('click',clearPhone);
+  // Keep hardware keyboard support on desktop without enabling the mobile OS keyboard.
+  byId('phone').addEventListener('keydown',e=>{
+    if(/^\d$/.test(e.key)){e.preventDefault();appendPhoneDigit(e.key);}
+    else if(e.key==='Backspace'){e.preventDefault();backspacePhone();}
+    else if(e.key==='Delete'){e.preventDefault();clearPhone();}
+  });
+  byId('changeMember').addEventListener('click',resetToLookup);
   byId('headerAdmin').addEventListener('click',openAdmin);byId('closeAdmin').addEventListener('click',()=>{byId('adminPanel').hidden=true;staffPinForAdmin=null;if(currentPhone)renderMember();else byId('lookupCard').scrollIntoView({behavior:'smooth'});});byId('saveSettings').addEventListener('click',saveSettings);
   byId('addStamp').addEventListener('click',addStamp);byId('redeem').addEventListener('click',redeem);byId('undo').addEventListener('click',undoStamp);
   for(const id of ['logPhone','logAction','startDate','endDate'])byId(id).addEventListener(id==='logPhone'?'input':'change',renderAdmin);

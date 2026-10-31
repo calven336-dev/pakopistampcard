@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes,viewport-fit=cover">
   <meta name="theme-color" content="#13263c">
   <meta name="description" content="A cloud-connected loyalty stamp card for cafés. Sync members, stamps and redemption logs across devices.">
   <meta name="color-scheme" content="light">
@@ -39,7 +39,7 @@
         <div class="section-heading"><div><div class="overline" data-i18n="stepOne">STEP 01 · MEMBER LOOKUP</div><h2 id="lookupHeading" data-i18n="lookupTitle">Find a member</h2></div><span class="section-icon" aria-hidden="true">⌕</span></div>
         <form id="lookupForm" class="lookup-form" autocomplete="off">
           <label for="phone" data-i18n="phoneLabel">Customer phone number</label>
-          <div class="lookup-controls"><div class="phone-field"><span class="phone-prefix">MY +60</span><input id="phone" type="tel" inputmode="tel" autocomplete="off" inputmode="none" placeholder="011 2345 6789" aria-describedby="phoneHint" required maxlength="24"></div><button class="btn btn-primary" type="submit"><span data-i18n="findMember">Find / create</span><span aria-hidden="true">→</span></button></div>
+          <div class="lookup-controls"><div class="phone-field"><span class="phone-prefix">MY +60</span><input id="phone" type="tel" inputmode="none" autocomplete="off" readonly placeholder="011 2345 6789" aria-describedby="phoneHint" required maxlength="24"></div><button class="btn btn-primary" type="submit"><span data-i18n="findMember">Find / create</span><span aria-hidden="true">→</span></button></div>
           <div class="helper" id="phoneHint" data-i18n="lookupHint">New numbers are saved securely to the shared cloud database.</div>
           <div class="phone-keypad" aria-label="Customer phone number keypad">
             <div class="keypad-title"><span class="keypad-live-dot"></span><span data-i18n="padReady">NUMPAD READY · ENTER PHONE NUMBER</span></div>
@@ -49,7 +49,7 @@
               <button type="button" class="pad-key" data-digit="7">7<small>PQRS</small></button><button type="button" class="pad-key" data-digit="8">8<small>TUV</small></button><button type="button" class="pad-key" data-digit="9">9<small>WXYZ</small></button>
               <button type="button" id="padClear" class="pad-key pad-utility" data-i18n="padClear">CLEAR</button><button type="button" class="pad-key" data-digit="0">0<small>+</small></button><button type="button" id="padBackspace" class="pad-key pad-utility" aria-label="Backspace">⌫</button>
             </div>
-            <div class="keypad-bottom-note" data-i18n="padHint">Tap numbers above or type using your keyboard.</div>
+            <div class="keypad-bottom-note" data-i18n="padHint">Tap the number pad above. The phone keyboard stays hidden.</div>
           </div>
         </form>
       </section>
